@@ -20,15 +20,13 @@ package cue.lang.unicode;
  * @author Jonathan Feinberg <jdf@us.ibm.com>
  * 
  */
-class Normalizer6 extends Normalizer
-{
-	public Normalizer6()
-	{
+class Normalizer6 extends Normalizer {
+	public Normalizer6() {
 	}
 
 	@Override
-	public String normalize(final String s)
-	{
-		return java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFKD);
+	public String normalize(final String s) {
+		return java.text.Normalizer
+				.normalize(s, java.text.Normalizer.Form.NFKD);
 	}
 }

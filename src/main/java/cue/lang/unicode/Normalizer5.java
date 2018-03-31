@@ -25,40 +25,29 @@ import java.io.ObjectInputStream;
  * @author Jonathan Feinberg <jdf@us.ibm.com>
  * 
  */
-class Normalizer5 extends Normalizer
-{
+class Normalizer5 extends Normalizer {
 	private static final char[] TABLE;
-	static
-	{
-		try
-		{
-			final ObjectInputStream in = new ObjectInputStream(Normalizer5.class
-					.getResourceAsStream("normtable.bin"));
-			try
-			{
+	static {
+		try {
+			final ObjectInputStream in = new ObjectInputStream(
+					Normalizer5.class.getResourceAsStream("normtable.bin"));
+			try {
 				TABLE = (char[]) in.readObject();
-			}
-			finally
-			{
+			} finally {
 				in.close();
 			}
-		}
-		catch (final Exception e)
-		{
+		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public Normalizer5()
-	{
+	public Normalizer5() {
 	}
 
 	@Override
-	public String normalize(final String s)
-	{
+	public String normalize(final String s) {
 		final StringBuilder sb = new StringBuilder();
-		for (int i = 0, len = s.length(); i < len; i++)
-		{
+		for (int i = 0, len = s.length(); i < len; i++) {
 			final char c = s.charAt(i);
 			sb.append(c >= TABLE.length ? c : TABLE[c]);
 		}

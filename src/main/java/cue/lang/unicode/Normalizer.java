@@ -20,38 +20,28 @@ package cue.lang.unicode;
  * @author Jonathan Feinberg <jdf@us.ibm.com>
  * 
  */
-public abstract class Normalizer
-{
-	public static Normalizer getInstance()
-	{
+public abstract class Normalizer {
+	public static Normalizer getInstance() {
 		return INSTANCE;
 	}
 
 	abstract public String normalize(final String s);
 
 	private static final Normalizer INSTANCE;
-	static
-	{
-		try
-		{
-			INSTANCE = (Normalizer) Class.forName(getNormalizerClass()).getConstructor()
-					.newInstance();
-		}
-		catch (final Exception e)
-		{
+	static {
+		try {
+			INSTANCE = (Normalizer) Class.forName(getNormalizerClass())
+					.getConstructor().newInstance();
+		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static String getNormalizerClass()
-	{
-		try
-		{
+	private static String getNormalizerClass() {
+		try {
 			Class.forName("java.text.Normalizer");
 			return "cue.lang.unicode.Normalizer6";
-		}
-		catch (final Exception e)
-		{
+		} catch (final Exception e) {
 			return "cue.lang.unicode.Normalizer5";
 		}
 	}

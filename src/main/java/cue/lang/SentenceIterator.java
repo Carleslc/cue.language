@@ -21,30 +21,28 @@ import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 /**
- * Construct with a {@link String}; retrieve a sequence of {@link String}s, each of
- * which is a "sentence" according to Java's built-in model for the given
+ * Construct with a {@link String}; retrieve a sequence of {@link String}s, each
+ * of which is a "sentence" according to Java's built-in model for the given
  * {@link Locale}.
  * 
  * @author Jonathan Feinberg <jdf@us.ibm.com>
  * 
  */
-public class SentenceIterator extends IterableText
-{
+public class SentenceIterator extends IterableText {
 	private final String text;
 	private final BreakIterator breakIterator;
 	int start, end;
 
 	/**
 	 * Uses the default {@link Locale} for the running isnatnce of the JVM.
+	 * 
 	 * @param text
 	 */
-	public SentenceIterator(final String text)
-	{
+	public SentenceIterator(final String text) {
 		this(text, Locale.getDefault());
 	}
 
-	public SentenceIterator(final String text, final Locale locale)
-	{
+	public SentenceIterator(final String text, final Locale locale) {
 		this.text = text;
 		breakIterator = BreakIterator.getSentenceInstance(locale);
 		breakIterator.setText(text);
@@ -52,36 +50,33 @@ public class SentenceIterator extends IterableText
 		advance();
 	}
 
-	private static final Pattern ABBREVS = Pattern.compile("(?:Mrs?|Ms|Dr|Rev)\\.\\s*$");
+	private static final Pattern ABBREVS = Pattern
+			.compile("(?:Mrs?|Ms|Dr|Rev)\\.\\s*$");
 
-	private void advance()
-	{
+	private void advance() {
 		start = end;
 		while (hasNext()
-				&& ((end == start) || ABBREVS.matcher(text.substring(start, end)).find()))
-		{
+				&& ((end == start) || ABBREVS.matcher(
+						text.substring(start, end)).find())) {
 			end = breakIterator.next();
 		}
 	}
 
-	public void remove()
-	{
+	public void remove() {
 		throw new UnsupportedOperationException();
 	}
 
-	public String next()
-	{
-		if (!hasNext())
-		{
+	public String next() {
+		if (!hasNext()) {
 			throw new NoSuchElementException();
 		}
-		final String result = text.substring(start, end).replaceAll("\\s+", " ");
+		final String result = text.substring(start, end)
+				.replaceAll("\\s+", " ");
 		advance();
 		return result;
 	}
 
-	public final boolean hasNext()
-	{
+	public final boolean hasNext() {
 		return end != BreakIterator.DONE;
 	}
 
