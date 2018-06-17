@@ -118,11 +118,9 @@ public enum StopWords {
         return remove(s, null);
     }
 
-    private void loadLanguage() {
+    public void loadLanguage() {
         final String wordlistResource = name().toLowerCase(Locale.ENGLISH);
-        if (!wordlistResource.equals("custom")) {
-            readStopWords(getClass().getResourceAsStream(wordlistResource), Charset.forName("UTF-8"));
-        }
+        readStopWords(getClass().getResourceAsStream(wordlistResource), Charset.forName("UTF-8"));
     }
 
     private void readStopWords(final InputStream inputStream, final Charset encoding) {
