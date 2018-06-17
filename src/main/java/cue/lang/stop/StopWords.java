@@ -120,7 +120,7 @@ public enum StopWords {
 
     public void loadLanguage() {
         final String wordlistResource = name().toLowerCase(Locale.ENGLISH);
-        readStopWords(getClass().getResourceAsStream(wordlistResource), Charset.forName("UTF-8"));
+        readStopWords(Thread.currentThread().getContextClassLoader().getResourceAsStream(wordlistResource), Charset.forName("UTF-8"));
     }
 
     private void readStopWords(final InputStream inputStream, final Charset encoding) {
