@@ -14,10 +14,7 @@
    limitations under the License.
  */
 
-package cue.lang.stop;
-
-import cue.lang.Counter;
-import cue.lang.WordIterator;
+package cue.lang;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -20,8 +20,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
-import cue.lang.stop.StopWords;
-
 /**
  * Construct with a {@link String}, some integer n, and a {@link Locale};
  * retrieve a sequence of {@link String}s, each of which has n words that appear
