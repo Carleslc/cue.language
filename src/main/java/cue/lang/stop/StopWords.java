@@ -16,16 +16,15 @@
 
 package cue.lang.stop;
 
+import cue.lang.Counter;
+import cue.lang.WordIterator;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.regex.Matcher;
-
-import cue.lang.Counter;
-import cue.lang.WordIterator;
 
 /**
  * 
@@ -49,7 +48,7 @@ public enum StopWords {
     }
 
     public static StopWords guess(final String text) {
-        return guess(new Counter<String>(new WordIterator(text)));
+        return guess(new Counter<>(new WordIterator(text)));
     }
 
     public static StopWords guess(final Counter<String> wordCounter) {
