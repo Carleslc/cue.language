@@ -39,12 +39,20 @@ public enum StopWords {
     Romanian("ro"), Russian("ru"), Slovenian("sl"), Slovak("sk"), Spanish("es"),
     Swedish("sv"), Hebrew("he"), Turkish("tr"), Custom(null);
 
+    public static String DEFAULT_DELIMITERS = " \t\n\r\f";
+
     private Locale locale;
+    private String language;
 
     StopWords(String locale) {
+        this.language = locale;
         if (locale != null) {
             this.locale = new Locale(locale);
         }
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
     public static StopWords guess(final String text) {
@@ -79,10 +87,12 @@ public enum StopWords {
         return s.length() == 1 || stopWords.contains(s.toLowerCase(locale));
     }
 
+    public boolean isStopWordExact(final String s) { return s.length() == 1 || stopWords.contains(s); }
+
     public String remove(final String s, String delimiters) {
         if (s == null) return null;
         if (s.isEmpty()) return "";
-        if (delimiters == null || delimiters.isEmpty()) delimiters = " \t\n\r\f";
+        if (delimiters == null || delimiters.isEmpty()) delimiters = DEFAULT_DELIMITERS;
 
         String trimmed = s.replaceAll("[\\W\\d]", " ");
 
